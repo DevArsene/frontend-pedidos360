@@ -1,0 +1,47 @@
+<div class="catalog-container">
+  <header class="header">
+    <h1>Pedidos360</h1>
+    <button (click)="goBack()">← Volver</button>
+  </header>
+
+  <main class="main-content">
+    <div class="title-row">
+      <h2>Catálogo de Productos</h2>
+      <button *ngIf="isAdmin" class="btn-add">+ Nuevo Producto</button>
+    </div>
+
+    <div *ngIf="loading" class="loading">Cargando productos...</div>
+
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <div *ngIf="!loading && !error">
+      <div *ngIf="products.length === 0" class="empty">
+        No hay productos disponibles.
+      </div>
+
+      <table *ngIf="products.length > 0" class="catalog-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th *ngIf="isAdmin || isOperador">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.id }}</td>
+            <td>{{ product.nombre }}</td>
+            <td>{{ product.precio }}</td>
+            <td>{{ product.stock }}</td>
+            <td *ngIf="isAdmin || isOperador">
+              <button class="btn-edit">Editar</button>
+              <button *ngIf="isAdmin" class="btn-delete">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

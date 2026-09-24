@@ -1,0 +1,48 @@
+<div class="orders-container">
+  <header class="header">
+    <h1>Pedidos360</h1>
+    <button (click)="goBack()">← Volver</button>
+  </header>
+
+  <main class="main-content">
+    <h2>
+      <span *ngIf="isCliente">Mis Pedidos</span>
+      <span *ngIf="isOperador || isAdmin">Gestión de Pedidos</span>
+    </h2>
+
+    <div *ngIf="loading" class="loading">Cargando pedidos...</div>
+
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <div *ngIf="!loading && !error">
+      <div *ngIf="orders.length === 0" class="empty">
+        No hay pedidos disponibles.
+      </div>
+
+      <table *ngIf="orders.length > 0" class="orders-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Estado</th>
+            <th>Total</th>
+            <th *ngIf="isOperador || isAdmin">Cliente</th>
+            <th *ngIf="isOperador || isAdmin">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.id }}</td>
+            <td>
+              <span class="status-badge">{{ order.estado }}</span>
+            </td>
+            <td>{{ order.total }}</td>
+            <td *ngIf="isOperador || isAdmin">{{ order.clienteId }}</td>
+            <td *ngIf="isOperador || isAdmin">
+              <button class="btn-action">Cambiar estado</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

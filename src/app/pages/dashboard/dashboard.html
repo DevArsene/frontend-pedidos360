@@ -1,0 +1,29 @@
+<div class="dashboard-container">
+  <header class="header">
+    <h1>Pedidos360</h1>
+    <div class="user-info">
+      <span>{{ userName }}</span>
+      <span class="role-badge" *ngIf="isAdmin">Admin</span>
+      <span class="role-badge operador" *ngIf="isOperador">Operador</span>
+      <span class="role-badge cliente" *ngIf="isCliente">Cliente</span>
+      <button (click)="logout()">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h2>Bienvenido, {{ userName }}</h2>
+
+    <div class="cards">
+      <div class="card" (click)="goToOrders()">
+        <h3>Pedidos</h3>
+        <p *ngIf="isCliente">Ver y crear tus pedidos</p>
+        <p *ngIf="isOperador || isAdmin">Gestionar todos los pedidos</p>
+      </div>
+
+      <div class="card" *ngIf="isAdmin || isOperador" (click)="goToCatalog()">
+        <h3>Catálogo</h3>
+        <p>Gestionar productos y stock</p>
+      </div>
+    </div>
+  </main>
+</div>
