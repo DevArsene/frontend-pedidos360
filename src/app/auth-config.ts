@@ -27,7 +27,7 @@ export const loginRequest = {
 
 export const protectedResources = {
   apiGateway: {
-    endpoint: 'http://localhost:8080',
+    endpoint: 'https://902vm8i2kb.execute-api.us-east-1.amazonaws.com',
     scopes: ['api://44ba8d56-0ba2-4cd3-beb3-da37d84624e8/access_as_user']
   }
 };
